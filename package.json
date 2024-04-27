@@ -1,0 +1,33 @@
+{
+  "name": "verdaccio-multi",
+  "version": "0.1.1",
+  "description": "",
+  "main": "index.js",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "bin": "./dist/index.js",
+  "scripts": {
+    "build": "esbuild index.js --bundle --outfile=/dist/index.js --platform=node --format=esm",
+    "release": "release-it --npm.publishArgs=--registry=https://registry.npmjs.org",
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "verdaccio",
+    "multi",
+    "node_modules"
+  ],
+  "author": "chendy",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "0.20.2",
+    "prompts": "^2.4.2",
+    "release-it": "^17.2.1"
+  },
+  "release-it": {
+    "hooks": {
+      "after:bump": "npm run build"
+    }
+  }
+}
