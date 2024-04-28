@@ -1,4 +1,13 @@
 
+#使用之前 先安装并启动verdaccio
+安装verdaccio:
+```sh
+npm install verdaccio -g
+```
+启动verdaccio：
+```sh
+verdaccio
+```
 ## 使用
 使用npm:
 ```sh

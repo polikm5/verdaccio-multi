@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import process from 'process'
 import child_process from 'child_process'
-import prompts from 'prompts'
+import readline from 'node:readline'
 const exec = child_process.execSync
 
 const rootPath = process.cwd()
@@ -74,16 +74,17 @@ function check(res, modulePath) {
         })
     }
 }
-(async () => {
-    const r = await prompts({
-        type: 'text',
-        name: 'next',
-        message: '是否下一步(y or n)'
-    })
-    if (/[y]|[yes]/gi.test(r.next)) {
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+  
+  rl.question('是否下一步?(y or n)', (answer) => {
+    if (/[y]|[yes]/gi.test(answer)) {
         batchPublish(successGroup, consoleLogPath, modulePath)
     }
-})()
+    // rl.close();
+  }); 
 
 function batchPublish(successGroup, consoleLogPath, modulePath) {
     let batchSuccessGroup = []
